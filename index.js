@@ -19,6 +19,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
+app.post('/login', async(req, res) => {
+    console.log(req.body);
+    const user = await User.findOne(req.body.email);
+    const password = req.body.password;
+    console.log('User entered', req.body.password);
+    console.log('Is pass', user.password);
+    if(password == req.body.password){
+        console.log('Success');
+        res.send('Success!');
+    }
+    else{
+        console.log('error');
+    }
+});
+
 app.post('/data', async(req, res) => {
     console.log(req.body);
     const { info } = req.body;
