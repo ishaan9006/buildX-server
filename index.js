@@ -20,12 +20,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 app.post('/login', async(req, res) => {
-    console.log(req.body);
+    const password = req.body.data.password;
+    
     const user = await User.findOne(req.body.email);
-    const password = req.body.password;
-    console.log('User entered', req.body.password);
-    console.log('Is pass', user.password);
-    if(password == req.body.password){
+
+    if(password == user['password']){
         console.log('Success');
         res.send('Success!');
     }
